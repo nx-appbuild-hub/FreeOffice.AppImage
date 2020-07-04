@@ -1,0 +1,1 @@
+# FreeOffice.AppImage

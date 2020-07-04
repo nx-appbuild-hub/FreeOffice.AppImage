@@ -1,0 +1,15 @@
+#! /bin/bash
+set -e
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${APPDIR}/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+
+cd ${HOME}
+
+case "$1" in
+  '--writer') exec ${APPDIR}/application/textmaker $2 ;;
+  '--spreadsheets')   exec ${APPDIR}/application/planmaker $2 ;;
+  '--presentation')   exec ${APPDIR}/application/presentations $2 ;;
+  *)   exec ${APPDIR}/application/textmaker $1 ;;
+esac
