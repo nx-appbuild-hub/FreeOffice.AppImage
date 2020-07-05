@@ -13,6 +13,10 @@ all:
 	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/openssl-libs-1.0.2k-19.el7.x86_64.rpm
 	rpm2cpio build.rpm | cpio -idmv
 
+	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/libidn-1.28-4.el7.x86_64.rpm
+	rpm2cpio build.rpm | cpio -idmv
+
+
 	mkdir -p ./AppDir/lib
 	mkdir -p ./AppDir/application
 	cp -r ./usr/lib64/* ./AppDir/lib
@@ -25,6 +29,6 @@ all:
 	rm -rf *.rpm
 	rm -rf ./build
 	rm -rf ./usr
-	rm -rf ./etc	
+	rm -rf ./etc
 	rm -rf ./AppDir/application
 	rm -rf ./AppDir/lib
