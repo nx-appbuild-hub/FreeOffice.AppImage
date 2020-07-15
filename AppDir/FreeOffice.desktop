@@ -17,7 +17,7 @@ Actions=Writer;Spreadsheets;Presentation;
 
 
 [Desktop Action Writer]
-Name=FreeOffice 2018 TextMaker
+Name=TextMaker
 GenericName=Word Processor
 Comment=The TextMaker word processor lets you work on any type of document.
 Comment[de]=Die Textverarbeitung TextMaker ermöglicht es Ihnen, beliebige Arten von Dokumenten zu erstellen und zu bearbeiten.
@@ -26,26 +26,23 @@ MimeType=application/x-tmdx;application/x-tmvx;application/x-tmd;application/x-t
 Categories=Office;WordProcessor;
 Exec=AppRun --writer %U
 StartupNotify=false
-Icon=freeoffice
 
 [Desktop Action Spreadsheets]
-Name=FreeOffice 2018 Spreadsheet
-GenericName=FreeOffice Spreadsheet
+Name=Spreadsheet
+GenericName=Spreadsheet
 Comment=PlanMaker lets you create all kinds of spreadsheets -- from simple ones to the most complex ones. Includes a high-caliber charting module.
 Comment[de]=Mit PlanMaker können Sie alle Arten von Arbeitsblättern erstellen -- von ganz einfachen bis zu den komplexesten. Inklusive eines leistungsstarken Diagrammmoduls.
 Comment[ru]=PlanMaker позволяет создавать все виды электронных таблиц, от простых до сложных. Включает в себя мощный модуль для составления диаграмм.
 MimeType=application/x-pmd;application/x-pmdx;application/x-pmv;application/excel;application/x-excel;application/x-ms-excel;application/x-msexcel;application/x-sylk;application/x-xls;application/xls;application/vnd.ms-excel;application/vnd.stardivision.calc;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.openxmlformats-officedocument.spreadsheetml.template;application/vnd.ms-excel.sheet.macroenabled.12;application/vnd.openxmlformats-officedocument.spreadsheetml.template;application/vnd.ms-excel.template.macroEnabled.12;application/x-dif;text/spreadsheet;text/csv;application/x-prn;application/vnd.ms-excel.sheet.binary.macroenabled.12;
 Exec=AppRun --spreadsheets %U
 StartupNotify=false
-Icon=freeoffice
 
 [Desktop Action Presentation]
-Name=FreeOffice 2018 Presentations
-GenericName=FreeOffice 2018 Presentations
+Name=Presentations
+GenericName=Presentations
 Comment=The Presentations software lets you design any kind of presentation - even including special effects, animations, and transitions.
 Comment[de]=Presentations lässt Sie beliebige Präsentationen gestalten - mit Effekten, Animationen und Transitionen.
 Comment[ru]=Presentations позволяет создавать все виды презентаций и добавлять в них специальные эффекты, анимацию и переходы.
 MimeType=application/x-prdx;application/x-prvx;application/x-prsx;application/x-prd;application/x-prv;application/x-prs;application/ppt;application/mspowerpoint;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.ms-powerpoint.presentation.macroenabled.12;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.ms-powerpoint.template.macroEnabled.12;application/vnd.ms-powerpoint.slideshow.macroenabled.12;application/vnd.openxmlformats-officedocument.presentationml.slideshow;
 Exec=AppRun --presentation %U
 StartupNotify=false
-Icon=freeoffice
