@@ -35,7 +35,7 @@ all:
 	mkdir -p ./AppDir/lib
 	mkdir -p ./AppDir/application
 	cp -r ./usr/lib64/* ./AppDir/lib
-	cp -r ./build/usr/share/freeoffice2018/* ./AppDir/application
+	cp -r ./build/usr/share/freeoffice*/* ./AppDir/application
 
 	export ARCH=x86_64 && bin/appimagetool.AppImage AppDir $(OUTPUT)
 	chmod +x $(OUTPUT)
