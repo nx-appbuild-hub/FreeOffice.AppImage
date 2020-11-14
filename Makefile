@@ -23,7 +23,7 @@ all:
 	wget --output-document=$(DESTINATION) --continue $(SOURCE)
 	dpkg -x $(DESTINATION) build
 
-	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/libcurl-7.29.0-57.el7.x86_64.rpm
+	wget --output-document=build.rpm http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/libcurl-7.61.1-12.el8.x86_64.rpm
 	rpm2cpio build.rpm | cpio -idmv
 
 	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/openssl-libs-1.0.2k-19.el7.x86_64.rpm
