@@ -14,36 +14,43 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-SOURCE="https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb"
-DESTINATION="build.deb"
-OUTPUT="FreeOffice.AppImage"
+PWD:=$(shell pwd)
 
-all:
-	echo "Building: $(OUTPUT)"
-	wget --output-document=$(DESTINATION) --continue $(SOURCE)
-	dpkg -x $(DESTINATION) build
+all: clean
+	mkdir --parents $(PWD)/build/Boilerplate.AppDir/freeoffice
+	apprepo --destination=$(PWD)/build appdir boilerplate libcurl4 openssl libidn
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}:$${APPDIR}/freeoffice' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'UUC_VALUE=`cat /proc/sys/kernel/unprivileged_userns_clone 2> /dev/null`' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'case "$$1" in' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '  "--writer") exec $${APPDIR}/freeoffice/textmaker "$${2}" ;;' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '  "--spreadsheets")   exec $${APPDIR}/freeoffice/planmaker "$${2}" ;;' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '  "--presentation")   exec $${APPDIR}/freeoffice/presentations "$${2}" ;;' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo '  *)   exec $${APPDIR}/freeoffice/textmaker "$${@}" ;;' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'esac' >> $(PWD)/build/Boilerplate.AppDir/AppRun
 
-	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/libcurl-7.29.0-57.el7.x86_64.rpm
-	rpm2cpio build.rpm | cpio -idmv
 
-	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/openssl-libs-1.0.2k-19.el7.x86_64.rpm
-	rpm2cpio build.rpm | cpio -idmv
+	wget --output-document=$(PWD)/build/build.deb --continue https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb
+	dpkg -x $(PWD)/build/build.deb $(PWD)/build/
 
-	wget --output-document=build.rpm http://mirror.centos.org/centos/7/os/x86_64/Packages/libidn-1.28-4.el7.x86_64.rpm
-	rpm2cpio build.rpm | cpio -idmv
+	
+	cp --force --recursive $(PWD)/build/usr/share/freeoffice*/* $(PWD)/build/Boilerplate.AppDir/freeoffice
 
-	mkdir -p ./AppDir/lib
-	mkdir -p ./AppDir/application
-	cp -r ./usr/lib64/* ./AppDir/lib
-	cp -r ./build/usr/share/freeoffice*/* ./AppDir/application
+	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop
 
-	export ARCH=x86_64 && bin/appimagetool.AppImage AppDir $(OUTPUT)
-	chmod +x $(OUTPUT)
+	cp --force $(PWD)/AppDir/*.desktop $(PWD)/build/Boilerplate.AppDir/
+	cp --force $(PWD)/AppDir/*.png $(PWD)/build/Boilerplate.AppDir/ || true
+	cp --force $(PWD)/AppDir/*.svg $(PWD)/build/Boilerplate.AppDir/ || true
 
-	rm -rf *.deb
-	rm -rf *.rpm
-	rm -rf ./build
-	rm -rf ./usr
-	rm -rf ./etc
-	rm -rf ./AppDir/application
-	rm -rf ./AppDir/lib
+	export ARCH=x86_64 && $(PWD)/bin/appimagetool.AppImage $(PWD)/build/Boilerplate.AppDir $(PWD)/FreeOffice.AppImage
+	chmod +x $(PWD)/FreeOffice.AppImage
+
+clean:
+	rm -rf $(PWD)/build
