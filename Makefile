@@ -25,10 +25,6 @@ all: clean
 	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}' 									>> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '' 																			>> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '' 																			>> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo 'UUC_VALUE=`cat /proc/sys/kernel/unprivileged_userns_clone 2> /dev/null`' 		>> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' 																			>> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' 																			>> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' 																			>> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo 'case "$$1" in' 																>> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '  "--writer") exec $${APPDIR}/freeoffice/textmaker "$${2}" ;;' 				>> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '  "--spreadsheets")   exec $${APPDIR}/freeoffice/planmaker "$${2}" ;;' 		>> $(PWD)/build/Boilerplate.AppDir/AppRun
@@ -37,7 +33,7 @@ all: clean
 	echo 'esac' 																		>> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 
-	wget --output-document=$(PWD)/build/build.deb --continue https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb
+	wget --output-document=$(PWD)/build/build.deb "https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb"
 	dpkg -x $(PWD)/build/build.deb $(PWD)/build/
 
 	
