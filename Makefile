@@ -33,7 +33,7 @@ all: clean
 	echo 'esac' 																		>> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 
-	wget --output-document=$(PWD)/build/build.deb "https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb"
+	wget --output-document=$(PWD)/build/build.deb "https://www.softmaker.net/down/softmaker-freeoffice-2021_1042-01_amd64.deb"
 	dpkg -x $(PWD)/build/build.deb $(PWD)/build/
 
 	
